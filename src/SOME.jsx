@@ -1,32 +1,30 @@
-import React, { useRef, useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import axios from 'axios'
+import Select from 'react-select'
 
 function CreateDocButton() {
 	const [name, setName] = useState('')
 	const [email, setEmail] = useState('')
 	const [nameDoc, setNameDoc] = useState('')
 	const [path, setPath] = useState('')
+	const [option, setOption] = useState([])
 
-	const sendReq = async (name1, email1, nameDoc1, path1) => {
-		let res1
-		await fetch('http://localhost:3201/api/formdata', {
-			// await fetch('http://localhost:3200/api/getData', {
-			method: 'POST',
-			headers: {
-				'Content-type': 'application/json'
-			},
-			body: JSON.stringify({
-				name: name1,
-				email: email1,
-				nameDoc: nameDoc1,
-				path: path1
-			})
-		})
-			.then((response) => response.json())
-			.then((response) => {
-				res1 = response
-			})
-	}
+	const options = option.map((option) => ({
+		value: option.id,
+		label: `hello`
+	}))
+
+	useEffect(() => {
+		const getData = async () => {
+			const res = await axios.get('https://jsonplaceholder.typicode.com/todos/') // изменить ссылку на свою (бэк)
+
+			setOption(res.data)
+		}
+
+		getData()
+	}, [])
+
+	console.log(option)
 
 	return (
 		<div>
@@ -56,10 +54,12 @@ function CreateDocButton() {
 			/>
 			<button
 				style={{ cursor: 'pointer' }}
-				onClick={() => sendReq(name, email, nameDoc, path)}
+				// onClick={() => sendReq(name, email, nameDoc, path)}
 			>
 				Отправить на сервер
 			</button>
+
+			<Select options={options} />
 		</div>
 	)
 }

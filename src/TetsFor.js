@@ -1,26 +1,18 @@
 import React, { useState } from 'react'
+import axios from 'axios'
+import Item from 'antd/es/list/Item'
 
 function FolderP() {
-	const [folderPath, setFolderPath] = useState('')
-
-	const handleFolderSelect = () => {
-		const { dialog } = window.require('electron').remote
-		const selectedFolder = dialog.showOpenDialogSync({
-			properties: ['openDirectory']
-		})
-		if (selectedFolder) {
-			setFolderPath(selectedFolder[0])
-		}
+	const [data, setData] = useState('')
+	const sendReq2 = async () => {
+		const resul = await axios.get('https://jsonplaceholder.typicode.com/todos')
+		setData(resul.data)
+		console.log(data)
 	}
 
 	return (
 		<div className='App'>
-			<form>
-				<label>Select a folder: </label>
-				<button onClick={handleFolderSelect}>Browse</button>
-				<br />
-				<input type='text' value={folderPath} readOnly />
-			</form>
+			<button onClick={sendReq2}></button>
 		</div>
 	)
 }
