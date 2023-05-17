@@ -8,6 +8,7 @@ function MyComponent() {
 	const [input1Val, setInput1Val] = useState('')
 	const [input2Val, setInput2Val] = useState('')
 	const [input3Val, setInput3Val] = useState('')
+	const [input4Val, setInput4Val] = useState('')
 
 	// Обработчик клика на кнопку "Добавить массив"
 	const handleAddArrayClick = () => {
@@ -19,6 +20,15 @@ function MyComponent() {
 		setShowModal(true)
 	}
 
+	const sendToSrever = () => {
+		fetch('http://localhost:3100/api/formdata', {
+			method: 'POST',
+			headers: {
+				'Content-type': 'application/json'
+			},
+			body: JSON.stringify({ arrays })
+		})
+	}
 	// Обработчик клика на кнопку "Сохранить"
 	const handleSaveClick = () => {
 		// Добавляем значения из полей в созданный массив
@@ -50,6 +60,9 @@ function MyComponent() {
 	const handleInput3Change = (event) => {
 		setInput3Val(event.target.value)
 	}
+	const handleInput4Change = (event) => {
+		setInput4Val(event.target.value)
+	}
 
 	// Состояние для отображения или скрытия модального окна
 	const [showModal, setShowModal] = useState(false)
@@ -65,6 +78,7 @@ function MyComponent() {
 						))}
 					</div>
 				))}
+				<button onClick={sendToSrever}>Отправить на сервер</button>
 			</div>
 
 			{/* Модальное окно */}
@@ -74,6 +88,7 @@ function MyComponent() {
 					<input type='text' value={input1Val} onChange={handleInput1Change} />
 					<input type='text' value={input2Val} onChange={handleInput2Change} />
 					<input type='text' value={input3Val} onChange={handleInput3Change} />
+					<input type='text' value={input4Val} onChange={handleInput4Change} />
 					<button onClick={handleSaveClick}>Сохранить</button>
 				</div>
 			)}
