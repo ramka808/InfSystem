@@ -1,4 +1,4 @@
-# Get started
+# To get started
 
 run react app
  ```shell
