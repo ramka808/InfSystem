@@ -15,5 +15,5 @@ cd srever
 npm i
 ```
 ```shell
-node srver
+node server
 ```
