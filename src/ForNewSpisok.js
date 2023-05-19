@@ -1,11 +1,12 @@
 import { useState } from 'react'
 import Filter from './Filter'
+import ThirdMain from './ThirdMain'
 
 function ForNewSpisok() {
 	const [filters, setFilters] = useState([])
 
 	const addFilter = () => {
-		setFilters([...filters, <Filter />])
+		setFilters([...filters, <ThirdMain />])
 	}
 
 	return (

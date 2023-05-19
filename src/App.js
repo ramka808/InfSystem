@@ -13,6 +13,7 @@ import FirstMain from './FirstMain'
 import SecondMain from './SecondMain'
 import DataComponent from './DataComponent'
 import ThirdMain from './ThirdMain'
+import RandomInput from './RandomInput'
 
 function App() {
 	return (
@@ -26,11 +27,16 @@ function App() {
 
 			{/* <InputArray />
 			<Filter />
-			<ForNewSpisok /> */}
-			<FirstMain />
+		 */}
+
+			{/* <FirstMain />
 			<SecondMain />
 			<DataComponent />
-			<ThirdMain />
+			<ThirdMain /> */}
+			<ForNewSpisok />
+			{/* <ThirdMain /> */}
+			{/* <SecondMain /> */}
+			{/* <RandomInput /> */}
 		</div>
 	)
 }
