@@ -43,17 +43,32 @@ function ThirdMain({ id, onRemove }) {
 	// Обработчик изменения значения input
 
 	const filteredData = students.filter((item) => item.Group === selectedValue)
-
+	//не правильно работатет
 	const handleChildData = (data) => {
-		SetArrEl([...arrEl, data])
-		console.log(arrEl) // выводим данные в консоль
+		SetArrEl((prevArray) => [...prevArray, data])
 	}
+	console.log(arrEl) // выводим данные в консоль
 
+	const [dataList, setDataList] = useState([])
+
+	function handleUpdateData(index, newData) {
+		setDataList((prevDataList) => {
+			const newDataList = [...prevDataList]
+			newDataList[index] = newData
+			return newDataList
+		})
+	}
+	function handleSubmit(event) {
+		event.preventDefault()
+		console.log(dataList)
+		// Далее можно сделать что-то с данными, например отправить их на сервер
+	}
 	return (
 		<div>
 			{/* <pre>{JSON.stringify(students, null, 2)}</pre> */}
 
 			{/* <label>Выберите группу</label> */}
+
 			<select value={selectedValue} onChange={handleChange}>
 				<option>Группа</option>
 				{uniqueGroups.map((item) => (
@@ -62,9 +77,17 @@ function ThirdMain({ id, onRemove }) {
 			</select>
 			{filteredData.map((item, index) => (
 				<div>
-					<InputSet key={index} student={item} onChildData={handleChildData} />
+					<InputSet
+						key1={index}
+						student={item}
+						// onChildData={handleChildData}
+						onChildData={(newData) => {
+							handleUpdateData(index, newData)
+						}}
+					/>
 				</div>
 			))}
+			<button onClick={handleSubmit}>Отправить данные</button>
 		</div>
 	)
 }

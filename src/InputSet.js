@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
 
-function InputSet({ student, onChildData }) {
+function InputSet({ key1, student, onChildData }) {
 	const sendDataToParent = () => {
 		onChildData(arr) // вызываем колбэк и передаем ему данные
 	}
@@ -54,9 +54,9 @@ function InputSet({ student, onChildData }) {
 				onChange={handleThemeChange}
 				size={80}
 			/>
-			<button onClick={sendDataToParent}>
+			{/* <button onClick={sendDataToParent}>
 				Отправить данные в родительский компонент
-			</button>
+			</button> */}
 		</div>
 	)
 }
