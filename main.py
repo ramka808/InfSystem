@@ -52,6 +52,7 @@ docInput.add_paragraph(str(arg3))
 docInput.save('inputAr.docx')
 doc = docx.Document('input3.docx')
 
+p = doc.add_paragraph() #Штука которую вызываешь когда надо добавить параграф
 sryle2 = doc.styles['Normal']
 font = sryle2.font
 font.name = 'Times New Roman'
@@ -84,7 +85,16 @@ for i in range(0, len(arg3)):
         cell1.merge(cell4)
         cell1.paragraphs[0].alignment = WD_PARAGRAPH_ALIGNMENT.CENTER
 
-
+        #Если колво слов больше 1 то сделать первые 2 слова жрным шрифтом, это для выделения группы
+        if len(cell1.paragraphs[0].text.split())>1:
+            parts = cell1.paragraphs[0].text.split()
+            # print(len(parts))
+            cell1.paragraphs[0].text = ''
+            run1 = cell1.paragraphs[0].add_run(parts[0]+' '+ parts[1])
+            run1.font.bold = True
+            print(parts)
+            for part in parts[2:]:
+                run3 = cell1.paragraphs[0].add_run(' ' + part)
 
 
 
@@ -113,22 +123,6 @@ for i in range(0, len(arg3)):
 #     new_cell.text = cell_data
 # сохраняем изменения в документе
 doc.save('output.docx')
-docOut = docx.Document('output.docx')
-tableOut = doc.tables[0]
-tableOut.style = 'Table Grid'
-print(len(tableOut.rows[1].cells))
-print(f"Number of cells in the table: {len(tableOut._element.xpath('.//w:tc'))}")
-for row in tableOut.rows:
-    for cell in row.cells:
-        # Проверяем наличие параграфов в ячейке
-        if cell.paragraphs:
-            # Получаем первый параграф ячейки
-            paragraph = cell.paragraphs[0]
-            # Проверяем, что параграф не пустой
-            if paragraph.text.strip():
-                # Устанавливаем выравнивание параграфа
-                paragraph.alignment = WD_PARAGRAPH_ALIGNMENT.CENTER
-docOut.save('output2.docx')
 
 
 # Title
