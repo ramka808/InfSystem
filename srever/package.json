@@ -10,6 +10,7 @@
 		"mysql": "^2.18.1",
 		"pizzip": "^3.1.4",
 		"python-shell": "^5.0.0",
+		"sequelize": "^6.31.1",
 		"sqlite3": "^5.1.6"
 	}
 }
